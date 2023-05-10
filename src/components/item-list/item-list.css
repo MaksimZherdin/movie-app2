@@ -1,50 +1,54 @@
 li {
-    list-style: none;
+  list-style: none;
 }
 
-
-
 .rating {
-    position: absolute;
-    top: 12px;
-    right: 9px;
-    border: 2px solid #E9D100;
-    border-radius: 50%;
-    padding: 6px 8px;
+  position: absolute;
+  top: 12px;
+  right: 9px;
+  border: 2px solid #e9d100;
+  border-radius: 50%;
+  padding: 6px 8px;
 }
 
 p {
-    max-height: 129px;
-    overflow-y: hidden;
-    font-size: 12px;
+  max-height: 129px;
+  overflow-y: hidden;
+  font-size: 12px;
 }
 
 ul {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .genre {
-    opacity: 65%;
-    padding: 2px 5px;
-    border: 1px solid #c4c4c4;
-    border-radius: 5px;
-    margin-right: 8px;
-    margin-top: 8px;
+  opacity: 65%;
+  padding: 2px 5px;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  margin-right: 8px;
+  margin-top: 8px;
 }
 
 .genres {
-    display: flex;
+  display: flex;
 }
 
 .date {
-    opacity: 75%;
-    margin-top: -25px;
+  opacity: 75%;
+  margin-top: -25px;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row-gap: 50px;
-    grid-column-gap: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 50px;
+  grid-column-gap: 50px;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
