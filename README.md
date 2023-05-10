@@ -1,1 +1,1 @@
-https://movie-12mqmr7jr-stigmataz.vercel.app/
+https://movie-msr00r2bl-stigmataz.vercel.app/
