@@ -1,7 +1,7 @@
 import { Col, Row, Spin, Input, Pagination, Alert } from 'antd';
 import './app.css';
 import { useEffect, useMemo, useState } from 'react';
-import { Offline, Online } from 'react-detect-offline';
+import { Detector } from 'react-detect-offline';
 
 import ItemList from '../item-list/ItemList';
 import Filtred from '../filtred/Filtred';
@@ -126,52 +126,53 @@ function App() {
   );
 
   return (
-    <>
-      <Online>
+    <Detector
+      render={({ online }) => (
         <div className="App">
-          <GenresContext.Provider value={providerData}>
-            {error ? (
-              <Alert type="error" message="Something gone wrong..." />
-            ) : (
-              <>
-                <Row className="header" justify="center">
-                  <Filtred
-                    setIsSearchPage={setIsSearchPage}
-                    setFilterRated={setFilterRated}
-                    updateList={updateList}
-                    getRatedMovies={getRatedMovies}
-                  />
-                  {isSearchPage && (
-                    <Input
-                      value={value}
-                      onChange={(e) => handleChange(e)}
-                      className="input"
-                      placeholder="Type to search..."
+          {online ? (
+            <GenresContext.Provider value={providerData}>
+              {error ? (
+                <Alert type="error" message="Something gone wrong..." />
+              ) : (
+                <>
+                  <Row className="header" justify="center">
+                    <Filtred
+                      setIsSearchPage={setIsSearchPage}
+                      setFilterRated={setFilterRated}
+                      updateList={updateList}
+                      getRatedMovies={getRatedMovies}
                     />
-                  )}
-                </Row>
-                <Row className="main" justify="center">
-                  {noFound ? <Alert type="error" message="We didn't found any films..." /> : null}
-                  <Col className="item" span={8}>
-                    {isLoading ? <ItemList itemList={itemList} sessionId={sessionId} /> : <Spin size="large" />}
-                  </Col>
-                </Row>
-                <Pagination
-                  current={current}
-                  onChange={(e) => updatePagination(e)}
-                  className="pagination"
-                  defaultCurrent={1}
-                  total={50}
-                />
-              </>
-            )}
-          </GenresContext.Provider>
+                    {isSearchPage && (
+                      <Input
+                        value={value}
+                        onChange={(e) => handleChange(e)}
+                        className="input"
+                        placeholder="Type to search..."
+                      />
+                    )}
+                  </Row>
+                  <Row className="main" justify="center">
+                    {noFound ? <Alert type="error" message="We didn't found any films..." /> : null}
+                    <Col className="item" span={8}>
+                      {isLoading ? <ItemList itemList={itemList} sessionId={sessionId} /> : <Spin size="large" />}
+                    </Col>
+                  </Row>
+                  <Pagination
+                    current={current}
+                    onChange={(e) => updatePagination(e)}
+                    className="pagination"
+                    defaultCurrent={1}
+                    total={50}
+                  />
+                </>
+              )}
+            </GenresContext.Provider>
+          ) : (
+            <Alert type="error" message="Your internet connection is lost..." />
+          )}
         </div>
-      </Online>
-      <Offline>
-        <Alert type="error" message="Your internet connection is lost..." />
-      </Offline>
-    </>
+      )}
+    />
   );
 }
 
